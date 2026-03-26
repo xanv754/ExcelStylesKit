@@ -1,3 +1,4 @@
+from openpyxl.worksheet.worksheet import Worksheet
 import excelstyleskit.utils as validation
 
 
@@ -13,6 +14,21 @@ class Cell:
             raise ValueError("Invalid value row")
         self._column = column.upper()
         self._row = row
+
+    def set_property(self, worksheet: Worksheet, property: str, value: any) -> None:
+        """Sets the values for an existing property of a cell.
+
+        Parameters:
+        -----------
+        worksheet : Worksheet
+            Active worksheet.
+        property : str
+            Property to define.
+        value : any
+            Value of the property to set.
+        """
+        cell = worksheet[self.get_cell()]
+        setattr(cell, property, value)
 
     def get_cell(self) -> str:
         """Returns the cell in the format <Column><Row>.

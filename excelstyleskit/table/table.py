@@ -1,9 +1,11 @@
+from openpyxl.worksheet.worksheet import Worksheet
 from excelstyleskit.table.cell import Cell
 from excelstyleskit.alphabet import Alphabet
 import excelstyleskit.utils as validation
 
 
 class Table:
+    _worksheet: Worksheet
     _first_column: str
     _first_row: int
     _last_column: str
@@ -13,12 +15,14 @@ class Table:
     _content: list[Cell]
     _headers: list[Cell]
 
-    def __init__(self, first_column: str, first_row: int, last_column: str, last_row: int, total_headers: int = 0) -> None:
+    def __init__(self, worksheet: Worksheet, first_column: str, first_row: int, last_column: str, last_row: int) -> None:
         if not validation.is_character(first_column) or not validation.is_character(last_column):
             raise ValueError("Invalid declaration column")
         if not validation.is_number(first_row) or not validation.is_number(last_row):
             raise ValueError("Invalid declaration row")
+        self._worksheet = worksheet
         self._content = []
+        self._headers = []
         self._first_column = first_column
         self._first_row = first_row
         self._last_column = last_column
@@ -35,9 +39,12 @@ class Table:
                         row=row
                     )
                 )
-        if total_headers > 0:
+
+    def set_header(self, total_row_header: int) -> None:
+        """Sets the row count for the table headers."""
+        if total_row_header > 0:
             self._headers = []
-            for i in range(1, total_headers + 1):
+            for i in range(1, total_row_header + 1):
                 self._headers += self.get_cells_by_row(i)
 
     def get_cells_by_row(self, num_row: int) -> list[Cell]:
