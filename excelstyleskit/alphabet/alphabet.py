@@ -1,4 +1,4 @@
-from excelstyleskit.constants import NUMBER_ALPHABET, STRING_ALPHABET
+from excelstyleskit.constants import NUMBER_ALPHABET, STRING_ALPHABET, COLUMN_MAX
 
 
 class Alphabet:
@@ -11,7 +11,7 @@ class Alphabet:
         number : int
             Reference number of column.
         """
-        if number > 16384:
+        if number > COLUMN_MAX:
             raise ValueError("Column number out of bounds")
         if number <= 26:
             return 1
