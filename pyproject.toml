@@ -19,5 +19,8 @@ dependencies = [
 ]
 urls = { Homepage = "https://github.com/xanv754/ExcelStylesKit" }
 
+[project.optional-dependencies]
+dev = ["black"]
+
 [tool.setuptools]
 packages = ["excelstyleskit"]

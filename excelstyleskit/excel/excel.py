@@ -11,7 +11,9 @@ class ExcelManager:
     _worksheet: Worksheet
     _table: Table | None
 
-    def __init__(self, filepath: str, new_sheetname: bool = False, sheetname: str | None = None) -> None:
+    def __init__(
+        self, filepath: str, new_sheetname: bool = False, sheetname: str | None = None
+    ) -> None:
         new_file: bool = False
         if Path(filepath).exists():
             self._workbook = load_workbook(filepath)
@@ -37,22 +39,22 @@ class ExcelManager:
         start_cell = start_cell.upper()
         end_cell = end_cell.upper()
         if not validation.is_cell(start_cell) or not validation.is_cell(end_cell):
-            raise ValueError(
-                "Start cell or end cell not valid or out of bounds"
-            )
+            raise ValueError("Start cell or end cell not valid or out of bounds")
         start_column = "".join(
-            [character for character in start_cell if character.isalpha()])
+            [character for character in start_cell if character.isalpha()]
+        )
         end_column = "".join(
-            [character for character in end_cell if character.isalpha()])
+            [character for character in end_cell if character.isalpha()]
+        )
         start_row = "".join(
-            [character for character in start_cell if character.isdigit()])
+            [character for character in start_cell if character.isdigit()]
+        )
         start_row = int(start_row)
-        end_row = "".join(
-            [character for character in end_cell if character.isdigit()])
+        end_row = "".join([character for character in end_cell if character.isdigit()])
         end_row = int(end_row)
         self._table = Table(
             first_column=start_column,
             first_row=start_row,
             last_column=end_column,
-            last_row=end_row
+            last_row=end_row,
         )

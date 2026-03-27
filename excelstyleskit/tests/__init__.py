@@ -12,7 +12,7 @@ class TestExcel:
     def __init__(self, filepath: str | None = None) -> None:
         if filepath is None:
             home = Path.cwd()
-            filepath = f'{home}/excelstyleskit/tests/example_excel.xlsx'
+            filepath = f"{home}/excelstyleskit/tests/example_excel.xlsx"
         self.filepath = filepath
         self.delete()
         self.workbook = Workbook()

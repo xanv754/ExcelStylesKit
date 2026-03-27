@@ -4,13 +4,14 @@ import excelstyleskit.utils as validation
 
 class Cell:
     """Represents a single cell within an Excel file. This class defines the objects that compose a Table object."""
+
     _column: str
     _row: int
 
     def __init__(self, column: str, row: int) -> None:
-        if not validation.is_character(column):
+        if not validation.is_column(column):
             raise ValueError("Invalid value column")
-        if not validation.is_number(row):
+        if not validation.is_row(row):
             raise ValueError("Invalid value row")
         self._column = column.upper()
         self._row = row
@@ -39,7 +40,7 @@ class Cell:
         >>> cell.get_cell()
         'A1'
         """
-        return f'{self._column}{self._row}'
+        return f"{self._column}{self._row}"
 
     def get_column(self) -> str:
         """Returns the column of the cell.

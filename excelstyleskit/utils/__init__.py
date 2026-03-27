@@ -1,11 +1,3 @@
-from excelstyleskit.utils.validation import (
-    is_character,
-    is_number,
-    is_cell
-)
+from excelstyleskit.utils.validation import is_column, is_row, is_cell
 
-__all__ = [
-    is_character,
-    is_number,
-    is_cell
-]
+__all__ = [is_column, is_row, is_cell]

@@ -15,10 +15,19 @@ class Table:
     _content: list[Cell]
     _headers: list[Cell]
 
-    def __init__(self, worksheet: Worksheet, first_column: str, first_row: int, last_column: str, last_row: int) -> None:
-        if not validation.is_character(first_column) or not validation.is_character(last_column):
+    def __init__(
+        self,
+        worksheet: Worksheet,
+        first_column: str,
+        first_row: int,
+        last_column: str,
+        last_row: int,
+    ) -> None:
+        if not validation.is_column(first_column) or not validation.is_column(
+            last_column
+        ):
             raise ValueError("Invalid declaration column")
-        if not validation.is_number(first_row) or not validation.is_number(last_row):
+        if not validation.is_row(first_row) or not validation.is_row(last_row):
             raise ValueError("Invalid declaration row")
         self._worksheet = worksheet
         self._content = []
@@ -27,17 +36,12 @@ class Table:
         self._first_row = first_row
         self._last_column = last_column
         self._last_row = last_row
-        self._num_first_column = Alphabet.get_number_column_by_string(
-            first_column)
-        self._num_last_column = Alphabet.get_number_column_by_string(
-            last_column)
+        self._num_first_column = Alphabet.get_number_column_by_string(first_column)
+        self._num_last_column = Alphabet.get_number_column_by_string(last_column)
         for col in range(self._num_first_column, self._num_last_column + 1):
             for row in range(first_row, last_row + 1):
                 self._content.append(
-                    Cell(
-                        column=Alphabet.get_string_column_by_number(col),
-                        row=row
-                    )
+                    Cell(column=Alphabet.get_string_column_by_number(col), row=row)
                 )
 
     def set_header(self, total_row_header: int) -> None:

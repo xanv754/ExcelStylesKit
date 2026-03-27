@@ -16,17 +16,9 @@ class TestCell(unittest.TestCase):
         """Tests the definition of a cell property."""
         file = TestExcel()
         blue = Color(rgb="0000FF")
-        format_fill = PatternFill(
-            patternType='solid',
-            start_color=blue,
-            end_color=blue
-        )
+        format_fill = PatternFill(patternType="solid", start_color=blue, end_color=blue)
         cell = Cell("A", 1)
-        cell.set_property(
-            worksheet=file.worksheet,
-            property="fill",
-            value=format_fill
-        )
+        cell.set_property(worksheet=file.worksheet, property="fill", value=format_fill)
         file.save()
         file.delete()
 
@@ -42,7 +34,7 @@ class TestTable(unittest.TestCase):
             first_column="A",
             first_row=1,
             last_column="D",
-            last_row=3
+            last_row=3,
         )
 
         self.assertIsInstance(table, Table)
@@ -66,5 +58,5 @@ class TestTable(unittest.TestCase):
         self.assertEqual(len(second_row), 4)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

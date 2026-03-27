@@ -36,7 +36,11 @@ class Alphabet:
                 num_letter = 26
             column += NUMBER_ALPHABET[num_letter]
             number = int(number / 26)
-            if (_next_round := i + 1) < total_letters and column == "Z" or column == "ZZ":
+            if (
+                (_next_round := i + 1) < total_letters
+                and column == "Z"
+                or column == "ZZ"
+            ):
                 number -= 1
         return column[::-1]
 
