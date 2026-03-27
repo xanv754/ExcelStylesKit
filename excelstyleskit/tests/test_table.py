@@ -38,7 +38,7 @@ class TestTable(unittest.TestCase):
         )
 
         self.assertIsInstance(table, Table)
-        self.assertEqual(len(table.get_content()), 12)
+        self.assertEqual(len(table.get_body()), 12)
 
     def test_set_header(self) -> None:
         """Tests the retrieval of the list of table header cells."""
@@ -47,7 +47,7 @@ class TestTable(unittest.TestCase):
         table.set_header(total_row_header=1)
 
         self.assertIsInstance(table, Table)
-        self.assertEqual(len(table.get_content()), 12)
+        self.assertEqual(len(table.get_body()), 12)
         self.assertEqual(len(table.get_header()), 4)
 
     def test_get_all_row(self) -> None:
