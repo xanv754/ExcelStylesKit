@@ -68,7 +68,8 @@ class ExcelManager:
         start_cell = start_cell.upper()
         end_cell = end_cell.upper()
         if not validation.is_cell(start_cell) or not validation.is_cell(end_cell):
-            raise ValueError("Starting cell or ending cell not valid or out of bounds")
+            raise ValueError(
+                "Starting cell or ending cell not valid or out of bounds")
         start_column = self._get_column(start_cell)
         end_column = self._get_column(end_cell)
         start_row = self._get_row(start_cell)
@@ -81,8 +82,33 @@ class ExcelManager:
             last_row=end_row,
         )
 
-    def apply_style(self, property: str, value: any) -> None:
-        """Apllies a style to the Excel table.
+    def define_header(self, rows: int) -> None:
+        """Defines trhe number of rows that the table will use as its header.
+
+        Parameters:
+        ----------
+        rows : int
+            Total count of rows designated as headers.
+        """
+        self._table.set_header(rows)
+
+    def apply_style_header(self, property: str, value: any) -> None:
+        """Applies a style to the header Excel table.
+
+        Parameters:
+        ----------
+        property : str
+            Property to define.
+        value : any
+            Value of the property to set.
+        """
+        if not self._table or not self._table.get_header():
+            raise Exception("Table or header table not defined")
+        self._table.set_style_header(property, value)
+        self._workbook.save(self._filepath)
+
+    def apply_style_body(self, property: str, value: any) -> None:
+        """Applies a style to the body Excel table.
 
         Parameters:
         ----------
@@ -93,5 +119,22 @@ class ExcelManager:
         """
         if not self._table:
             raise Exception("Table not defined")
+        self._table.set_style_body(property, value)
+        self._workbook.save(self._filepath)
+
+    def apply_style_table(self, property: str, value: any) -> None:
+        """Applies a style to the Excel table.
+
+        Parameters:
+        ----------
+        property : str
+            Property to define.
+        value : any
+            Value of the property to set.
+        """
+        if not self._table:
+            raise Exception("Table not defined")
+        if self._table.get_header():
+            self._table.set_style_header(property, value)
         self._table.set_style_body(property, value)
         self._workbook.save(self._filepath)

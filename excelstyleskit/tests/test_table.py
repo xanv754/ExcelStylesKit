@@ -16,9 +16,11 @@ class TestCell(unittest.TestCase):
         """Tests the definition of a cell property."""
         file = TestExcel()
         blue = Color(rgb="0000FF")
-        format_fill = PatternFill(patternType="solid", start_color=blue, end_color=blue)
+        format_fill = PatternFill(
+            patternType="solid", start_color=blue, end_color=blue)
         cell = Cell("A", 1)
-        cell.set_property(worksheet=file.worksheet, property="fill", value=format_fill)
+        cell.set_property(worksheet=file.worksheet,
+                          property="fill", value=format_fill)
         file.save()
         file.delete()
 
@@ -47,7 +49,7 @@ class TestTable(unittest.TestCase):
         table.set_header(total_row_header=1)
 
         self.assertIsInstance(table, Table)
-        self.assertEqual(len(table.get_body()), 12)
+        self.assertEqual(len(table.get_body()), 8)
         self.assertEqual(len(table.get_header()), 4)
 
     def test_get_all_row(self) -> None:

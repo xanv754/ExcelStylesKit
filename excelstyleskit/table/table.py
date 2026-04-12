@@ -1,6 +1,7 @@
 from openpyxl.worksheet.worksheet import Worksheet
 from excelstyleskit.table.cell import Cell
 from excelstyleskit.alphabet import Alphabet
+from excelstyleskit.constants.alphabet import STRING_ALPHABET
 import excelstyleskit.utils as validation
 
 
@@ -36,13 +37,33 @@ class Table:
         self._first_row = first_row
         self._last_column = last_column
         self._last_row = last_row
-        self._num_first_column = Alphabet.get_number_column_by_string(first_column)
-        self._num_last_column = Alphabet.get_number_column_by_string(last_column)
+        self._num_first_column = Alphabet.get_number_column_by_string(
+            first_column)
+        self._num_last_column = Alphabet.get_number_column_by_string(
+            last_column)
         for col in range(self._num_first_column, self._num_last_column + 1):
             for row in range(first_row, last_row + 1):
                 self._body.append(
-                    Cell(column=Alphabet.get_string_column_by_number(col), row=row)
+                    Cell(
+                        column=Alphabet.get_string_column_by_number(col),
+                        row=row
+                    )
                 )
+
+    def _set_style_body(self, property: str, value: any, content: list[Cell]) -> None:
+        """Defines the style for all table body cells.
+
+        Parameters:
+        ----------
+        property : str
+            Property to define.
+        value : any
+            Value of the property to set.
+        content : list[Cell]
+            Header o body.
+        """
+        for cell in content:
+            cell.set_property(self._worksheet, property, value)
 
     def set_header(self, total_row_header: int) -> None:
         """Sets the row count for the table headers."""
@@ -50,6 +71,26 @@ class Table:
             self._headers = []
             for i in range(1, total_row_header + 1):
                 self._headers += self.get_cells_by_row(i)
+            new_body: list[Cell] = []
+            for i in range(total_row_header + 1, STRING_ALPHABET[self._last_column]):
+                new_body += self.get_cells_by_row(i)
+            self._body = new_body
+
+    def set_style_header(self, property: str, value: any) -> None:
+        """Defines the style for all table header cells.
+
+        Parameters:
+        ----------
+        property : str
+            Property to define.
+        value : any
+            Value of the property to set.
+        """
+        self._set_style_body(
+            property=property,
+            value=value,
+            content=self._headers
+        )
 
     def set_style_body(self, property: str, value: any) -> None:
         """Defines the style for all table body cells.
@@ -61,8 +102,11 @@ class Table:
         value : any
             Value of the property to set.
         """
-        for cell in self._body:
-            cell.set_property(self._worksheet, property, value)
+        self._set_style_body(
+            property=property,
+            value=value,
+            content=self._body
+        )
 
     def get_cells_by_row(self, num_row: int) -> list[Cell]:
         """Returns all cells within a row for a given row number.

@@ -8,10 +8,13 @@ class TestExcelStyles(unittest.TestCase):
         """Tests the style configuration for applying a background color to an Excel table."""
         file = TestExcel()
         blue = "0000FF"
+        red = "FF0000"
         excel = ExcelManager(file.filepath)
         excel.set_table("A1", "D4")
+        excel.define_header(rows=1)
         styles = ExcelStyle(excel)
         self.assertTrue(styles.set_background(blue))
+        self.assertTrue(styles.set_header_background(red))
         file.delete()
 
     def test_set_font(self) -> None:
