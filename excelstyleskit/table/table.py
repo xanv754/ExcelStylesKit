@@ -2,11 +2,14 @@ from openpyxl.worksheet.worksheet import Worksheet
 from excelstyleskit.table.cell import Cell
 from excelstyleskit.alphabet import Alphabet
 from excelstyleskit.constants.alphabet import STRING_ALPHABET
+from tabulate import tabulate
 import excelstyleskit.utils as validation
+from collections import defaultdict
 
 
 class Table:
     _worksheet: Worksheet
+    _total_row_headers: int
     _first_column: str
     _first_row: int
     _last_column: str
@@ -31,6 +34,7 @@ class Table:
         if not validation.is_row(first_row) or not validation.is_row(last_row):
             raise ValueError("Invalid declaration row")
         self._worksheet = worksheet
+        self._total_row_headers = 0
         self._body = []
         self._headers = []
         self._first_column = first_column
@@ -72,9 +76,10 @@ class Table:
             for i in range(1, total_row_header + 1):
                 self._headers += self.get_cells_by_row(i)
             new_body: list[Cell] = []
-            for i in range(total_row_header + 1, STRING_ALPHABET[self._last_column]):
+            for i in range(total_row_header + 1, self._last_row + 1):
                 new_body += self.get_cells_by_row(i)
             self._body = new_body
+            self._total_row_headers = total_row_header
 
     def set_style_header(self, property: str, value: any) -> None:
         """Defines the style for all table header cells.
@@ -134,5 +139,10 @@ class Table:
 
     def display_cells(self) -> None:
         """Displays all cells (column and row coordinates) within the table to the console."""
-        for cell in self._body:
-            print(cell.get_cell())
+        content = self._headers + self._body
+        text_content = [cell.get_cell() for cell in content]
+        rows_dict = defaultdict(list)
+        for cell in text_content:
+            rows_dict[cell[1]].append(cell)
+        table = [rows_dict[key] for key in sorted(rows_dict.keys())]
+        print(tabulate(table, tablefmt="simple_grid"))

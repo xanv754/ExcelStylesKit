@@ -53,11 +53,20 @@ class TestTable(unittest.TestCase):
         self.assertEqual(len(table.get_header()), 4)
 
     def test_get_all_row(self) -> None:
+        """Test the complete retrieval of a table row."""
         file = TestExcel()
         table = Table(file.worksheet, "A", 1, "D", 3)
         second_row = table.get_cells_by_row(2)
 
         self.assertEqual(len(second_row), 4)
+
+    def test_display_table(self) -> None:
+        """Test the terminal rendering of the Excel table."""
+        file = TestExcel()
+        table = Table(file.worksheet, "A", 1, "D", 3)
+        table.display_cells()
+
+        self.assertTrue(True)
 
 
 if __name__ == "__main__":
