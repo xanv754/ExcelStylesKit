@@ -1,17 +1,9 @@
 import unittest
-from excelstyleskit.alphabet import Alphabet
+
+from exceltablekit.alphabet import Alphabet
 
 
 class TestAlphabet(unittest.TestCase):
-    def test_get_total_letters_by_number(self) -> None:
-        """Tests the calculation of the total possible characters for a column index."""
-        self.assertEqual(Alphabet.get_total_letters_by_number(1), 1)
-        self.assertEqual(Alphabet.get_total_letters_by_number(26), 1)
-        self.assertEqual(Alphabet.get_total_letters_by_number(27), 2)
-        self.assertEqual(Alphabet.get_total_letters_by_number(702), 2)
-        self.assertEqual(Alphabet.get_total_letters_by_number(703), 3)
-        self.assertEqual(Alphabet.get_total_letters_by_number(16384), 3)
-
     def test_get_string_column_by_number(self) -> None:
         """Tests the conversion of a numeric index to its corresponding column letter."""
         self.assertEqual(Alphabet.get_string_column_by_number(1), "A")

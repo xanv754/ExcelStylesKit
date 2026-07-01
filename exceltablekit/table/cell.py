@@ -1,5 +1,9 @@
+from typing import Any
+
 from openpyxl.worksheet.worksheet import Worksheet
-import excelstyleskit.utils as validation
+
+from exceltablekit.errors import InvalidColumnValueError, InvalidRowValueError
+from exceltablekit.utils import Validation
 
 
 class Cell:
@@ -9,14 +13,16 @@ class Cell:
     _row: int
 
     def __init__(self, column: str, row: int) -> None:
-        if not validation.is_column(column):
-            raise ValueError("Invalid value column")
-        if not validation.is_row(row):
-            raise ValueError("Invalid value row")
-        self._column = column.upper()
-        self._row = row
+        try:
+            Validation.column(column)
+            Validation.row(row)
+        except (InvalidColumnValueError, InvalidRowValueError):
+            raise
+        else:
+            self._column = column.upper()
+            self._row = row
 
-    def set_property(self, worksheet: Worksheet, property: str, value: any) -> None:
+    def set_property(self, worksheet: Worksheet, property: str, value: Any) -> None:
         """Sets the values for an existing property of a cell.
 
         Parameters:
@@ -25,7 +31,7 @@ class Cell:
             Active worksheet.
         property : str
             Property to define.
-        value : any
+        value : Any
             Value of the property to set.
         """
         cell = worksheet[self.get_cell()]

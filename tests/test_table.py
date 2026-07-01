@@ -1,8 +1,10 @@
-from excelstyleskit.table import Cell, Table
+import unittest
+
 from openpyxl.styles import PatternFill
 from openpyxl.styles.colors import Color
-from excelstyleskit.tests import TestExcel
-import unittest
+
+from exceltablekit.table import Cell, Table
+from tests import TestExcel
 
 
 class TestCell(unittest.TestCase):
@@ -16,11 +18,9 @@ class TestCell(unittest.TestCase):
         """Tests the definition of a cell property."""
         file = TestExcel()
         blue = Color(rgb="0000FF")
-        format_fill = PatternFill(
-            patternType="solid", start_color=blue, end_color=blue)
+        format_fill = PatternFill(patternType="solid", start_color=blue, end_color=blue)
         cell = Cell("A", 1)
-        cell.set_property(worksheet=file.worksheet,
-                          property="fill", value=format_fill)
+        cell.set_property(worksheet=file.worksheet, property="fill", value=format_fill)
         file.save()
         file.delete()
 
