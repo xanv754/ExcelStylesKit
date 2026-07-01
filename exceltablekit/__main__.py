@@ -28,9 +28,18 @@ def info() -> None:
 @click.argument("filepath")
 @click.option("--start", default="A1", show_default=True, help="Start cell (e.g. A1).")
 @click.option("--end", default="D10", show_default=True, help="End cell (e.g. D10).")
-@click.option("--header-rows", default=1, show_default=True, help="Number of header rows.")
-@click.option("--bg", default="E8F4FD", show_default=True, help="Body background hex color.")
-@click.option("--header-bg", default="1F4E79", show_default=True, help="Header background hex color.")
+@click.option(
+    "--header-rows", default=1, show_default=True, help="Number of header rows."
+)
+@click.option(
+    "--bg", default="E8F4FD", show_default=True, help="Body background hex color."
+)
+@click.option(
+    "--header-bg",
+    default="1F4E79",
+    show_default=True,
+    help="Header background hex color.",
+)
 @click.option(
     "--border-style",
     default="thin",

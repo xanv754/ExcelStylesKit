@@ -55,6 +55,7 @@ class TestExcelStyles(unittest.TestCase):
             styles.freeze_header()
             self.assertEqual(file.workbook["Sheet"].freeze_panes, None)
             from openpyxl import load_workbook
+
             wb = load_workbook(file.filepath)
             ws = wb.active
             self.assertEqual(ws.freeze_panes, "A3")
@@ -69,6 +70,7 @@ class TestExcelStyles(unittest.TestCase):
             styles = ExcelStyle(excel)
             styles.freeze_header()
             from openpyxl import load_workbook
+
             wb = load_workbook(file.filepath)
             ws = wb.active
             self.assertEqual(ws.freeze_panes, "A4")
@@ -83,6 +85,7 @@ class TestExcelStyles(unittest.TestCase):
             styles = ExcelStyle(excel)
             styles.freeze_header()
             from openpyxl import load_workbook
+
             wb = load_workbook(file.filepath)
             ws = wb.active
             self.assertEqual(ws.freeze_panes, "B4")
@@ -90,6 +93,7 @@ class TestExcelStyles(unittest.TestCase):
     def test_auto_fit_columns(self) -> None:
         """Tests that auto_fit_columns sets each column width to the longest cell content plus padding."""
         from openpyxl import load_workbook
+
         with TestExcel() as file:
             file.worksheet["A1"] = "Short"
             file.worksheet["A2"] = "A much longer value"
@@ -102,7 +106,9 @@ class TestExcelStyles(unittest.TestCase):
             styles.auto_fit_columns()
             wb = load_workbook(file.filepath)
             ws = wb.active
-            self.assertEqual(ws.column_dimensions["A"].width, len("A much longer value") + 2)
+            self.assertEqual(
+                ws.column_dimensions["A"].width, len("A much longer value") + 2
+            )
             self.assertEqual(ws.column_dimensions["B"].width, len("Hello") + 2)
 
 
