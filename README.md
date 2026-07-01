@@ -14,8 +14,6 @@ A declarative abstraction layer over [openpyxl](https://openpyxl.readthedocs.io/
 pip install exceltablekit
 ```
 
-**Requirements:** Python >= 3.10
-
 ## Quick start
 
 ### Python
@@ -55,7 +53,7 @@ exceltablekit info
 
 ## Documentation
 
-Full API reference and guides at [exceltablekit.readthedocs.io](https://exceltablekit.readthedocs.io) *(coming soon)*.
+Full API reference and guides at [exceltablekit.readthedocs.io](https://exceltablekit.readthedocs.io/en/latest/index.html).
 
 ## License
 
