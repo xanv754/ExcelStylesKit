@@ -1,0 +1,2 @@
+class ExcelTableKitError(Exception):
+    pass
