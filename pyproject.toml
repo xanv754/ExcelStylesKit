@@ -42,3 +42,5 @@ exceltablekit = "exceltablekit.__main__:cli"
 
 [tool.setuptools.packages.find]
 where = ["."]
+include = ["exceltablekit*"]
+exclude = ["tests*", "docs*"]
