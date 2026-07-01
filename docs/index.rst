@@ -9,10 +9,6 @@ ExcelTableKit Documentation
    :target: https://pypi.org/project/exceltablekit/
    :alt: Python versions
 
-.. image:: https://img.shields.io/github/license/xanv754/ExcelTableKit
-   :target: https://github.com/xanv754/ExcelTableKit/blob/main/LICENSE
-   :alt: License
-
 **ExcelTableKit** is a Python library that acts as a high-level abstraction layer
 over `openpyxl <https://openpyxl.readthedocs.io/>`_ for styling tables in ``.xlsx`` files.
 
