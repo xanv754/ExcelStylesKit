@@ -1,10 +1,10 @@
 # ExcelTableKit
 
-[![PyPI version](https://img.shields.io/pypi/v/exceltablekit?color=blue)](https://pypi.org/project/exceltablekit/)
-[![Python versions](https://img.shields.io/pypi/pyversions/exceltablekit)](https://pypi.org/project/exceltablekit/)
-[![License: MIT](https://img.shields.io/github/license/xanv754/ExcelTableKit)](https://github.com/xanv754/ExcelTableKit/blob/main/LICENSE)
-[![CI](https://img.shields.io/github/actions/workflow/status/xanv754/ExcelTableKit/ci.yml?branch=main&label=CI)](https://github.com/xanv754/ExcelTableKit/actions/workflows/ci.yml)
-[![PyPI downloads](https://img.shields.io/pypi/dm/exceltablekit)](https://pypi.org/project/exceltablekit/)
+[![PyPI version](https://img.shields.io/pypi/v/exceltablekit?color=blue&cachebust=1)](https://pypi.org/project/exceltablekit/)
+[![Python versions](https://img.shields.io/pypi/pyversions/exceltablekit?cachebust=1)](https://pypi.org/project/exceltablekit/)
+[![License: MIT](https://img.shields.io/github/license/xanv754/ExcelTableKit?cachebust=1)](https://github.com/xanv754/ExcelTableKit/blob/main/LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/xanv754/ExcelTableKit/ci.yml?branch=main&label=CI&cachebust=1)](https://github.com/xanv754/ExcelTableKit/actions/workflows/ci.yml)
+[![PyPI downloads](https://img.shields.io/pypi/dm/exceltablekit?cachebust=1)](https://pypi.org/project/exceltablekit/)
 
 A declarative abstraction layer over [openpyxl](https://openpyxl.readthedocs.io/) that simplifies styling Excel tables in `.xlsx` files. Define cell ranges as table objects and apply colors, fonts, borders, and alignment without touching `PatternFill`, `Border`, `Side`, or any other low-level openpyxl construct directly.
 
