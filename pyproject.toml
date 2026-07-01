@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "exceltablekit"
-version = "2.0.0"
+version = "2.0.1"
 description = "Python library for defining and styling Excel table ranges as objects, built on top of openpyxl."
 readme = "README.md"
 requires-python = ">=3.10"
