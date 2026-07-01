@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/xanv754/ExcelStylesKit"
+Homepage = "https://github.com/xanv754/ExcelTableKit"
 
 [project.optional-dependencies]
 dev = ["black"]
